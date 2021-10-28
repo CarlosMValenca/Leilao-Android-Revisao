@@ -121,16 +121,24 @@ public class LeilaoTest {
     }
 
     @Test
-    public void deve_DevolverTresMaioresLances_QuandoReceberApenasQuatroLances(){
+    public void deve_DevolverTresMaioresLances_QuandoReceberMaisDeTresLances(){
         CONSOLE.propoe(new Lance(ALEX, 300.0));
         CONSOLE.propoe(new Lance(FRAN, 400.0));
         CONSOLE.propoe(new Lance(ALEX, 500.0));
         CONSOLE.propoe(new Lance(FRAN, 600.0));
 
-        List<Lance> tresMaioresLancesDevolvidos = CONSOLE.tresMaioresLances();
-        assertEquals(3, tresMaioresLancesDevolvidos.size());
-        assertEquals(600.0, tresMaioresLancesDevolvidos.get(0).getValor(), DELTA);
-        assertEquals(500.0, tresMaioresLancesDevolvidos.get(1).getValor(), DELTA);
-        assertEquals(400.0, tresMaioresLancesDevolvidos.get(2).getValor(), DELTA);
+        List<Lance> tresMaioresLancesDevolvidosParaQuatroLances = CONSOLE.tresMaioresLances();
+        assertEquals(3, tresMaioresLancesDevolvidosParaQuatroLances.size());
+        assertEquals(600.0, tresMaioresLancesDevolvidosParaQuatroLances.get(0).getValor(), DELTA);
+        assertEquals(500.0, tresMaioresLancesDevolvidosParaQuatroLances.get(1).getValor(), DELTA);
+        assertEquals(400.0, tresMaioresLancesDevolvidosParaQuatroLances.get(2).getValor(), DELTA);
+
+        CONSOLE.propoe(new Lance(ALEX, 700.0));
+
+        List<Lance> tresMaioresLancesDevolvidosParaCincoLances = CONSOLE.tresMaioresLances();
+        assertEquals(3, tresMaioresLancesDevolvidosParaCincoLances.size());
+        assertEquals(700.0, tresMaioresLancesDevolvidosParaCincoLances.get(0).getValor(), DELTA);
+        assertEquals(600.0, tresMaioresLancesDevolvidosParaCincoLances.get(1).getValor(), DELTA);
+        assertEquals(500.0, tresMaioresLancesDevolvidosParaCincoLances.get(2).getValor(), DELTA);
     }
 }
