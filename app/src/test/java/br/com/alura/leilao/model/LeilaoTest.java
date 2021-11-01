@@ -17,10 +17,7 @@ public class LeilaoTest {
     public static final double DELTA = 0.0001;
     private final Leilao CONSOLE = new Leilao("Console");
     private final Usuario ALEX = new Usuario("Alex");
-    private final Usuario FRAN = new Usuario("Fran");
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
+    private final Usuario FRAN = new Usuario("Fran");;
 
     @Test
     public void deve_DevolverDescricao_QuandoREcebeDescricao() {
@@ -145,16 +142,14 @@ public class LeilaoTest {
         assertEquals(0.0, menorLanceDevolvido, DELTA);
     }
 
-    @Test
+    @Test(expected = LanceMenorQueUltimoLanceException.class)
     public void naoDeve_AdicionarLance_QuandoForMenorQueOMaiorLance() {
-        exception.expect(LanceMenorQueUltimoLanceException.class);
         CONSOLE.propoe(new Lance(ALEX, 500.0));
         CONSOLE.propoe(new Lance(FRAN, 400.0));
     }
 
-    @Test
+    @Test(expected = LanceSeguidoDoMesmoUsuarioException.class)
     public void naoDeve_AdicionarLance_QuandoForOMesmoUsuarioDoUltimoLance() {
-        exception.expect(LanceSeguidoDoMesmoUsuarioException.class);
         CONSOLE.propoe(new Lance(ALEX, 500.0));
         CONSOLE.propoe(new Lance(ALEX, 600.0));
     }
